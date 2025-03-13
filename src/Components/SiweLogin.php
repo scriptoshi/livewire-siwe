@@ -19,7 +19,7 @@ class SiweLogin extends Component
      */
     public function mount()
     {
-        $this->nonce = $this->generateNonce();
+        $this->generateNonce();
     }
 
     /**
