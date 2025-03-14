@@ -4,9 +4,9 @@ This guide will help you quickly set up Sign In With Ethereum in your Laravel ap
 
 ## Prerequisites
 
-- Laravel 12+ with Livewire 3 installed
-- An AppKit project ID from [reown.xyz](https://reown.xyz)
-- Basic knowledge of Ethereum authentication
+-   Laravel 12+ with Livewire 3 installed
+-   An AppKit project ID from [reown.xyz](https://reown.xyz)
+-   Basic knowledge of Ethereum authentication
 
 ## Installation Steps
 
@@ -48,7 +48,7 @@ APPKIT_PROJECT_ID=your-project-id-here
 ### 6. Add SIWE login to your login page
 
 ```blade
-<livewire:siwe-login />
+<livewire:siwe-auth />
 ```
 
 ### 7. Import SIWE in your app.js file
@@ -58,7 +58,7 @@ APPKIT_PROJECT_ID=your-project-id-here
 import { createSiwe } from "../vendor/scriptoshi/livewire-siwe/js/siwe.js";
 
 // Initialize SIWE when the document is loaded
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener("DOMContentLoaded", function () {
     createSiwe();
 });
 ```
@@ -79,16 +79,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
 ## Troubleshooting
 
-- **JavaScript errors**: Make sure you've installed the required npm packages
-- **Authentication fails**: Check your AppKit project ID is correct
-- **Missing wallet UI**: Ensure createSiwe() is being called after page load
-- **Database errors**: Confirm your users table has the address column
+-   **JavaScript errors**: Make sure you've installed the required npm packages
+-   **Authentication fails**: Check your AppKit project ID is correct
+-   **Missing wallet UI**: Ensure createSiwe() is being called after page load
+-   **Database errors**: Confirm your users table has the address column
 
 ## Next Steps
 
-- Customize the user registration process
-- Change the SIWE button styling
-- Implement wallet disconnect functionality
-- Add support for multiple blockchain networks
+-   Customize the user registration process
+-   Change the SIWE button styling
+-   Implement wallet disconnect functionality
+-   Add support for multiple blockchain networks
 
 For more detailed information, check the [full documentation](README.md).

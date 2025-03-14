@@ -4,18 +4,18 @@ A Laravel Livewire package for authenticating users with Ethereum wallets using 
 
 ## Features
 
-- Easy integration with Laravel's authentication system
-- Secure verification of Ethereum signatures
-- Automatic user creation based on wallet address
-- Configurable redirect URLs and Ethereum chain IDs
-- Customizable user registration data
+-   Easy integration with Laravel's authentication system
+-   Secure verification of Ethereum signatures
+-   Automatic user creation based on wallet address
+-   Configurable redirect URLs and Ethereum chain IDs
+-   Customizable user registration data
 
 ## Requirements
 
-- PHP 8.2 or higher
-- Laravel 12.x
-- Livewire 3.x
-- AppKit Project ID from [reown.xyz](https://reown.xyz)
+-   PHP 8.2 or higher
+-   Laravel 12.x
+-   Livewire 3.x
+-   AppKit Project ID from [reown.xyz](https://reown.xyz)
 
 ## Installation
 
@@ -62,7 +62,7 @@ SIWE_REDIRECT_URL=dashboard
 Once installed, you can use the SIWE login component in your Blade views:
 
 ```blade
-<livewire:siwe-login />
+<livewire:siwe-auth />
 ```
 
 ## JavaScript Setup
@@ -74,7 +74,7 @@ Once installed, you can use the SIWE login component in your Blade views:
 import { createSiwe } from "../vendor/scriptoshi/livewire-siwe/js/siwe.js";
 
 // Initialize SIWE when the document is loaded
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener("DOMContentLoaded", function () {
     createSiwe();
 });
 ```
