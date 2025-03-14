@@ -13,7 +13,7 @@
         <h1 class="text-2xl font-bold text-center mb-6">Sign In With Ethereum</h1>
         
         <div class="mb-4">
-            <livewire:siwe-login />
+            <livewire:siwe-auth />
         </div>
         
         <div class="mt-4 text-center text-sm text-gray-500">

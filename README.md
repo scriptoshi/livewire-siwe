@@ -46,6 +46,27 @@ This will add an `address` column to your users table for storing Ethereum walle
 npm install @reown/appkit @reown/appkit-adapter-ethers @reown/appkit-siwe
 ```
 
+### 5. Configure Tailwind CSS
+
+To ensure that Tailwind CSS properly processes the component styles, add this package to your content sources in your CSS file (typically `resources/css/app.css`):
+
+```css
+/* Add this line with your other @source directives */
+@source '../../vendor/scriptoshi/livewire-siwe/resources/views/**/*.blade.php';
+```
+
+For example, your CSS file might look similar to this:
+
+```css
+@import "tailwindcss";
+
+@source "../views";
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../vendor/scriptoshi/livewire-siwe/resources/views/**/*.blade.php';
+
+/* Rest of your CSS file */
+```
+
 ## Configuration
 
 After publishing the package assets, you can find the configuration file at `config/livewire-siwe.php`. You need to set your AppKit project ID and other configuration options:

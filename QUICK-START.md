@@ -37,7 +37,15 @@ php artisan migrate
 npm install @reown/appkit @reown/appkit-adapter-ethers @reown/appkit-siwe
 ```
 
-### 5. Configure your AppKit project ID
+### 5. Configure Tailwind CSS
+
+Add the package's views to your Tailwind content sources in `resources/css/app.css`:
+
+```css
+@source '../../vendor/scriptoshi/livewire-siwe/resources/views/**/*.blade.php';
+```
+
+### 6. Configure your AppKit project ID
 
 Add your AppKit project ID to your `.env` file:
 
@@ -45,13 +53,13 @@ Add your AppKit project ID to your `.env` file:
 APPKIT_PROJECT_ID=your-project-id-here
 ```
 
-### 6. Add SIWE login to your login page
+### 7. Add SIWE login to your login page
 
 ```blade
 <livewire:siwe-auth />
 ```
 
-### 7. Import SIWE in your app.js file
+### 8. Import SIWE in your app.js file
 
 ```javascript
 // resources/js/app.js
@@ -63,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 ```
 
-### 8. Include your app.js in your layout
+### 9. Include your app.js in your layout
 
 ```blade
 @vite(['resources/js/app.js'])
@@ -83,6 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
 -   **Authentication fails**: Check your AppKit project ID is correct
 -   **Missing wallet UI**: Ensure createSiwe() is being called after page load
 -   **Database errors**: Confirm your users table has the address column
+-   **Styling issues**: Make sure you've added the package to your Tailwind content sources
 
 ## Next Steps
 

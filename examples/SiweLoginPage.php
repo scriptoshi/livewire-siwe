@@ -38,7 +38,7 @@ new class extends Component {
         @else
         <h2 class="text-2xl font-bold text-center mb-6">Ethereum Login</h2>
         <div class="mb-4">
-            <livewire:siwe-login />
+            <livewire:siwe-auth />
         </div>
         <div class="mt-4 text-center text-sm text-gray-500">
             <p>Connect your Ethereum wallet to sign in</p>
