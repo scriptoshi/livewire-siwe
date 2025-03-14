@@ -1,40 +1,49 @@
-# Livewire SIWE Button (Sign In With Ethereum)
+# Livewire SIWE (Sign In With Ethereum)
 
-A Laravel Livewire button for authenticating users with Ethereum wallets using the SIWE (Sign In With Ethereum) protocol.
+A Laravel Livewire package for authenticating users with Ethereum wallets using the SIWE (Sign In With Ethereum) protocol.
 
 ## Features
 
--   Easy integration with Laravel's authentication system
--   Secure verification of Ethereum signatures
--   Automatic user creation based on wallet address
--   Configurable redirect URLs and Ethereum chain IDs
--   Customizable user registration data
+- Easy integration with Laravel's authentication system
+- Secure verification of Ethereum signatures
+- Automatic user creation based on wallet address
+- Configurable redirect URLs and Ethereum chain IDs
+- Customizable user registration data
 
 ## Requirements
 
--   PHP 8.2 or higher
--   Laravel 12.x
--   Livewire 3.x
--   AppKit Project ID from [reown.xyz](https://reown.xyz)
+- PHP 8.2 or higher
+- Laravel 12.x
+- Livewire 3.x
+- AppKit Project ID from [reown.xyz](https://reown.xyz)
 
 ## Installation
 
-You can install the package via composer:
+### 1. Install the package via composer:
 
 ```bash
 composer require scriptoshi/livewire-siwe
 ```
 
-Then publish the package assets and configuration:
+### 2. Publish the package assets and configuration:
 
 ```bash
-php artisan vendor:publish --provider="Scriptoshi\LivewireSiwe\LivewireSiweServiceProvider"
+php artisan vendor:publish --tag=livewire-siwe-config
+php artisan vendor:publish --tag=livewire-siwe-migrations
 ```
 
-After publishing the assets, install the required dependencies:
+### 3. Run the migrations:
 
 ```bash
-npm install
+php artisan migrate
+```
+
+This will add an `address` column to your users table for storing Ethereum wallet addresses.
+
+### 4. Install the required JavaScript dependencies:
+
+```bash
+npm install @reown/appkit @reown/appkit-adapter-ethers @reown/appkit-siwe
 ```
 
 ## Configuration
@@ -45,22 +54,12 @@ After publishing the package assets, you can find the configuration file at `con
 // In your .env file
 APPKIT_PROJECT_ID=your-appkit-project-id
 SIWE_CHAIN_ID=1 # Ethereum Mainnet
-SIWE_REDIRECT_URL=/dashboard
-```
-
-## Database Setup
-
-Your User model must have an `address` column to store the Ethereum address. You can create a migration like this:
-
-```php
-Schema::table('users', function (Blueprint $table) {
-    $table->string('address')->nullable()->unique();
-});
+SIWE_REDIRECT_URL=dashboard
 ```
 
 ## Usage
 
-Once installed, you can use the SIWE login component in your login/register blade view:
+Once installed, you can use the SIWE login component in your Blade views:
 
 ```blade
 <livewire:siwe-login />
@@ -78,11 +77,15 @@ Or with Volt:
 
 ```javascript
 // Import the SIWE module
-import { createSiwe } from "../vendor/scriptoshi/livewire-siwe/js/siwe.js";
-createSiwe();
+import { createSiwe } from '@reown/appkit-siwe';
+
+// Initialize SIWE when the document is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    createSiwe();
+});
 ```
 
-2. Make sure you include your app.js in your layout:
+2. Include your app.js in your layout:
 
 ```blade
 @vite(['resources/js/app.js'])
@@ -105,16 +108,6 @@ public function boot()
     }]);
 }
 ```
-
-## Dependencies
-
-This package requires the following JavaScript dependencies in your frontend:
-
--   @reown/appkit
--   @reown/appkit-adapter-ethers
--   @reown/appkit-siwe
-
-These dependencies are included in the package.json and will be installed when you run `npm install`.
 
 ## License
 

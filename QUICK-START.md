@@ -4,9 +4,9 @@ This guide will help you quickly set up Sign In With Ethereum in your Laravel ap
 
 ## Prerequisites
 
--   Laravel 12+ with Livewire 3 installed
--   An AppKit project ID from [reown.xyz](https://reown.xyz)
--   Basic knowledge of Ethereum authentication
+- Laravel 12+ with Livewire 3 installed
+- An AppKit project ID from [reown.xyz](https://reown.xyz)
+- Basic knowledge of Ethereum authentication
 
 ## Installation Steps
 
@@ -19,22 +19,23 @@ composer require scriptoshi/livewire-siwe
 ### 2. Publish assets and config
 
 ```bash
-php artisan vendor:publish --provider="Scriptoshi\LivewireSiwe\LivewireSiweServiceProvider"
+php artisan vendor:publish --tag=livewire-siwe-config
+php artisan vendor:publish --tag=livewire-siwe-migrations
 ```
 
-### 3. Install JavaScript dependencies
-
-```bash
-npm install
-```
-
-### 4. Add the Ethereum address field to your users table
+### 3. Run migrations
 
 ```bash
 php artisan migrate
 ```
 
-> Note: This will run the migration that adds an `address` column to your users table.
+> Note: This will add an `address` column to your users table for storing Ethereum wallet addresses.
+
+### 4. Install JavaScript dependencies
+
+```bash
+npm install @reown/appkit @reown/appkit-adapter-ethers @reown/appkit-siwe
+```
 
 ### 5. Configure your AppKit project ID
 
@@ -54,9 +55,12 @@ APPKIT_PROJECT_ID=your-project-id-here
 
 ```javascript
 // resources/js/app.js
-import { createSiwe } from "../vendor/scriptoshi/livewire-siwe/js/siwe.js";
+import { createSiwe } from '@reown/appkit-siwe';
+
 // Initialize SIWE when the document is loaded
-createSiwe();
+document.addEventListener('DOMContentLoaded', function() {
+    createSiwe();
+});
 ```
 
 ### 8. Include your app.js in your layout
@@ -75,16 +79,16 @@ createSiwe();
 
 ## Troubleshooting
 
--   **JavaScript errors**: Make sure you've installed dependencies and imported the SIWE module correctly
--   **Authentication fails**: Check your AppKit project ID is correct
--   **Missing wallet UI**: Ensure createSiwe() is being called after page load
--   **Database errors**: Confirm your users table has the address column
+- **JavaScript errors**: Make sure you've installed the required npm packages
+- **Authentication fails**: Check your AppKit project ID is correct
+- **Missing wallet UI**: Ensure createSiwe() is being called after page load
+- **Database errors**: Confirm your users table has the address column
 
 ## Next Steps
 
--   Customize the user registration process
--   Change the SIWE button styling
--   Implement wallet disconnect functionality
--   Add support for multiple blockchain networks
+- Customize the user registration process
+- Change the SIWE button styling
+- Implement wallet disconnect functionality
+- Add support for multiple blockchain networks
 
 For more detailed information, check the [full documentation](README.md).
