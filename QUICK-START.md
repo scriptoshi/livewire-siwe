@@ -55,7 +55,7 @@ APPKIT_PROJECT_ID=your-project-id-here
 
 ```javascript
 // resources/js/app.js
-import { createSiwe } from '@reown/appkit-siwe';
+import { createSiwe } from "../vendor/scriptoshi/livewire-siwe/js/siwe.js";
 
 // Initialize SIWE when the document is loaded
 document.addEventListener('DOMContentLoaded', function() {
