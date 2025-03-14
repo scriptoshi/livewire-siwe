@@ -25,7 +25,7 @@ A Laravel Livewire package for authenticating users with Ethereum wallets using 
 composer require scriptoshi/livewire-siwe
 ```
 
-### 2. Publish the package assets and configuration:
+### 2. (OPTIONAL) Publish the package assets and configuration:
 
 ```bash
 php artisan vendor:publish --tag=livewire-siwe-config
@@ -69,10 +69,11 @@ For example, your CSS file might look similar to this:
 
 ## Configuration
 
-After publishing the package assets, you can find the configuration file at `config/livewire-siwe.php`. You need to set your AppKit project ID and other configuration options:
+After publishing the package assets, you can find the configuration file at `config/livewire-siwe.php`. You need to set your [AppKit project ID](https://cloud.reown.com/) and other configuration options:
 
 ```php
 // In your .env file
+#https://cloud.reown.com/
 APPKIT_PROJECT_ID=your-appkit-project-id
 SIWE_CHAIN_ID=1 # Ethereum Mainnet
 SIWE_REDIRECT_URL=dashboard
@@ -92,7 +93,7 @@ Once installed, you can use the SIWE login component in your Blade views:
 
 ```javascript
 // Import the SIWE module
-import { createSiwe } from "../vendor/scriptoshi/livewire-siwe/js/siwe.js";
+import { createSiwe } from "../../vendor/scriptoshi/livewire-siwe/resources/js/siwe.js";
 
 // Initialize SIWE when the document is loaded
 document.addEventListener("DOMContentLoaded", function () {

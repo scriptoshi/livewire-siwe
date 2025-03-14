@@ -1,6 +1,8 @@
 <?php
 
 return [
+
+    'project_id' =>  env('APPKIT_PROJECT_ID'),
     /*
     |--------------------------------------------------------------------------
     | Default Redirect Route
