@@ -1,6 +1,6 @@
 {
     "name": "scriptoshi/livewire-siwe",
-    "description": "Sign In With Ethereum integration for Laravel Livewire",
+    "description": "Sign in with Ethereum integration for Laravel using Livewire",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -13,8 +13,7 @@
         "php": "^8.2",
         "illuminate/support": "^12.0",
         "livewire/livewire": "^3.0",
-        "kornrunner/keccak": "^1.1",
-        "simplito/elliptic-php": "^1.0"
+        "kornrunner/keccak": "^1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^11.0",
@@ -38,6 +37,5 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true,
-    "version": "1.0.0"
+    "prefer-stable": true
 }

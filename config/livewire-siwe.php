@@ -1,78 +1,41 @@
 <?php
 
 return [
-    /**
-     * The AppKit project ID from reown.xyz
-     */
-    'project_id' => env('APPKIT_PROJECT_ID', ''),
+    /*
+    |--------------------------------------------------------------------------
+    | Default Redirect Route
+    |--------------------------------------------------------------------------
+    |
+    | This defines where to redirect the user after successful authentication
+    | through SIWE. You can override this in the component if needed.
+    |
+    */
+    'redirect_route' => 'dashboard',
 
-    /**
-     * The statement that will be displayed to users during login
-     */
-    'statement' => env('SIWE_STATEMENT', 'Sign in with your Ethereum account to access this application'),
+    /*
+    |--------------------------------------------------------------------------
+    | Message Options
+    |--------------------------------------------------------------------------
+    |
+    | Configure the options for the SIWE message
+    |
+    */
+    'message' => [
+        'domain' => env('APP_URL', 'localhost'),
+        'statement' => 'Sign in with Ethereum to authenticate with this application.',
+        'uri' => env('APP_URL', 'localhost'),
+        'version' => '1',
+        'chain_id' => env('SIWE_CHAIN_ID', 1), // 1 for Ethereum mainnet
+    ],
 
-    /**
-     * The Ethereum chain ID to use for SIWE
-     * 1 = Ethereum Mainnet
-     * 5 = Goerli Testnet
-     * 11155111 = Sepolia Testnet
-     */
-    'chain_id' => env('SIWE_CHAIN_ID', 1),
-
-    /**
-     * The route or path to redirect to after successful authentication
-     */
-    'redirect_url' => env('SIWE_REDIRECT_URL', 'dashboard'),
-
-    /**
-     * Whether the redirect_url should be treated as a route name (true) or a direct path (false)
-     */
-    'redirect_is_route' => env('SIWE_REDIRECT_IS_ROUTE', true),
-
-    /**
-     * The User model to use for authentication
-     */
-    'user_model' => env('SIWE_USER_MODEL', \App\Models\User::class),
-
-    /**
-     * The required fields for the user model
-     * These will be included in the user creation
-     */
-    'required_user_fields' => ['name', 'address'],
-
-    /**
-     * Whether to fire the Registered event after user creation
-     */
-    'fire_registered_event' => true,
-
-    /**
-     * Optional callback to customize user data before registration
-     * 
-     * Example:
-     * 'user_data_callback' => function(string $address, array $userData) {
-     *     $userData['name'] = 'ETH User: ' . substr($address, 0, 6);
-     *     return $userData;
-     * }
-     */
-    'user_data_callback' => null,
-
-    /**
-     * Optional callback that runs after successful login
-     * 
-     * Example:
-     * 'post_login_callback' => function($user) {
-     *     // Update last login timestamp, etc.
-     * }
-     */
-    'post_login_callback' => null,
-
-    /**
-     * Optional callback that runs after successful registration
-     * 
-     * Example:
-     * 'post_register_callback' => function($user) {
-     *     // Assign default role, send welcome email, etc.
-     * }
-     */
-    'post_register_callback' => null,
+    /*
+    |--------------------------------------------------------------------------
+    | Auto Create Users
+    |--------------------------------------------------------------------------
+    |
+    | If enabled, new users will be created automatically when they sign in
+    | with Ethereum for the first time.
+    |
+    */
+    'auto_create_users' => true,
 ];
