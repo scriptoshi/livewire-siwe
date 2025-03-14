@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('address')->nullable()->unique()->after('email');
+            // Ensure we can nullify users and passsword
+            if (Schema::hasColumn('users', 'name'))
+                $table->string('name')->nullable()->change();
+            if (Schema::hasColumn('users', 'password'))
+                $table->string('password')->nullable()->change();
         });
     }
 
