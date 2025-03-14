@@ -70,11 +70,7 @@ class SiweLogin extends Component
             $redirectUrl = config('livewire-siwe.redirect_url', '/dashboard');
 
             // If the redirect URL is a route name, resolve it
-            if (config('livewire-siwe.redirect_is_route', true)) {
-                $this->redirect(route($redirectUrl, absolute: false));
-            } else {
-                $this->redirect($redirectUrl);
-            }
+            $this->redirect($redirectUrl);
         } catch (\Exception $e) {
             $this->error = 'Authentication error: ' . $e->getMessage();
         }
@@ -160,7 +156,7 @@ class SiweLogin extends Component
     protected function authenticate($address)
     {
         // Get the user model class from config
-        $userModelClass = config('livewire-siwe.user_model');
+        $userModelClass = config('livewire-siwe.user_model', \App\Models\User::class);
 
         // If no model is configured, throw an exception
         if (!$userModelClass || !class_exists($userModelClass)) {
@@ -181,12 +177,6 @@ class SiweLogin extends Component
     {
         $user = $userModelClass::where('address', $address)->first();
         Auth::login($user);
-
-        // Allow for custom post-login hooks
-        if (is_callable(config('livewire-siwe.post_login_callback'))) {
-            call_user_func(config('livewire-siwe.post_login_callback'), $user);
-        }
-
         return $user;
     }
 
@@ -195,40 +185,17 @@ class SiweLogin extends Component
      */
     protected function register($address, $userModelClass)
     {
-        // Get required fields from config or use default
-        $requiredFields = config('livewire-siwe.required_user_fields', ['name', 'address']);
 
         // Base user data with just the address
         $userData = [
             'address' => $address,
+            'name' =>  substr($address, 0, 6) . '...' . substr($address, -4),
         ];
-
-        // Add default name if required
-        if (in_array('name', $requiredFields)) {
-            $userData['name'] = substr($address, 0, 6) . '...' . substr($address, -4);
-        }
-
-        // Apply custom user data if a callback is defined
-        if (is_callable(config('livewire-siwe.user_data_callback'))) {
-            $userData = call_user_func(config('livewire-siwe.user_data_callback'), $address, $userData);
-        }
-
         // Create the user
         $user = $userModelClass::create($userData);
-
-        // Fire registered event if configured to do so
-        if (config('livewire-siwe.fire_registered_event', true)) {
-            event(new Registered($user));
-        }
-
+        event(new Registered($user));
         // Log the user in
         Auth::login($user);
-
-        // Allow for custom post-registration hooks
-        if (is_callable(config('livewire-siwe.post_register_callback'))) {
-            call_user_func(config('livewire-siwe.post_register_callback'), $user);
-        }
-
         return $user;
     }
 

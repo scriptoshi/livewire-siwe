@@ -5,14 +5,14 @@ return [
     'project_id' =>  env('APPKIT_PROJECT_ID'),
     /*
     |--------------------------------------------------------------------------
-    | Default Redirect Route
+    | Default Redirect URL
     |--------------------------------------------------------------------------
     |
     | This defines where to redirect the user after successful authentication
     | through SIWE. You can override this in the component if needed.
     |
     */
-    'redirect_route' => 'dashboard',
+    'redirect_url' => '/dashboard',
 
     /*
     |--------------------------------------------------------------------------
@@ -22,22 +22,16 @@ return [
     | Configure the options for the SIWE message
     |
     */
-    'message' => [
-        'domain' => env('APP_URL', 'localhost'),
-        'statement' => 'Sign in with Ethereum to authenticate with this application.',
-        'uri' => env('APP_URL', 'localhost'),
-        'version' => '1',
-        'chain_id' => env('SIWE_CHAIN_ID', 1), // 1 for Ethereum mainnet
-    ],
+
+    'statement' => 'Sign in with Ethereum to authenticate with this application.',
+    'chain_id' => env('SIWE_CHAIN_ID', 1),
 
     /*
     |--------------------------------------------------------------------------
-    | Auto Create Users
+    | User Model
     |--------------------------------------------------------------------------
-    |
-    | If enabled, new users will be created automatically when they sign in
-    | with Ethereum for the first time.
+    |Defaults to App\User\Model;
     |
     */
-    'auto_create_users' => true,
+    'user_model' => \App\Models\User::class
 ];
