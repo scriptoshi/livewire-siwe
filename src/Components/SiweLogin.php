@@ -67,10 +67,10 @@ class SiweLogin extends Component
             $this->nonce = $this->generateNonce();
 
             // Redirect to configured URL after successful login
-            $redirectUrl = config('livewire-siwe.redirect_url', '/dashboard');
+            $redirectRoute = config('livewire-siwe.redirect_route', 'dashboard');
 
             // If the redirect URL is a route name, resolve it
-            $this->redirect($redirectUrl);
+            $this->redirectIntended(default: route($redirectRoute, absolute: false), navigate: true);
         } catch (\Exception $e) {
             $this->error = 'Authentication error: ' . $e->getMessage();
         }

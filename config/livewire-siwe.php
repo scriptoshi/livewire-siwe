@@ -12,7 +12,7 @@ return [
     | through SIWE. You can override this in the component if needed.
     |
     */
-    'redirect_url' => '/dashboard',
+    'redirect_route' => 'dashboard',
 
     /*
     |--------------------------------------------------------------------------
