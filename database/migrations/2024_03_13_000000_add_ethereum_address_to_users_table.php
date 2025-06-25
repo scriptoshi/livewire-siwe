@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('address')->nullable()->unique()->after('email');
+            if (!Schema::hasColumn('users', 'address'))
+                $table->string('address')->nullable()->unique()->after('email');
             // Ensure we can nullify users and passsword
             if (Schema::hasColumn('users', 'name'))
                 $table->string('name')->nullable()->change();
